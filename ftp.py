@@ -8,7 +8,8 @@
 # Start the server with:
 #
 # import ftp
-#
+# Don't forget to uncomment the last line “ftpserver()”, otherwise the FTP server doesn't start
+# 
 # Copyright (c) 2016 Christopher Popp (initial ftp server framework)
 # Copyright (c) 2016 Robert Hammelrath (putting the pieces together
 # and a few extensions)
@@ -18,7 +19,7 @@ import socket
 import network
 import uos
 import gc
-
+from time import sleep_ms, localtime # Without this, the compiler frowns: “localtime” is not defined” on account of "tm=localtime(uos.stat(path)[8])" in "elif command == "MDTM":"
 
 def send_list_data(path, dataclient, full):
     try:  # whether path is a directory name
@@ -330,4 +331,4 @@ def ftpserver(port=21, timeout=None):
             dataclient.close()
 
 
-# ftpserver()
+# ftpserver() # Do not forget to uncomment this line, otherwise the FTP server will not start
